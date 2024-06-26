@@ -1,6 +1,9 @@
 @echo off
 cd /d d:\chatbot
 
+echo Creating virtual environment...
+call python -m venv venv
+
 echo Activating virtual environment...
 call venv\Scripts\activate
 
