@@ -36,3 +36,7 @@ pip install -r requirements.txt
 python gradio_ui.py
 
 
+or 
+
+use Start.bat
+
