@@ -1,0 +1,7 @@
+# ignores enviroment and temp files
+
+
+__pycache__/
+venv/
+.env
+.packages_installed
