@@ -13,6 +13,9 @@ if exist venv (
 echo Activating virtual environment...
 call venv\Scripts\activate
 
+:: Set PYTHONPATH to include virtual environment site-packages
+set PYTHONPATH=%CD%\venv\Lib\site-packages;%PYTHONPATH%
+
 :: Check if the packages have already been installed
 if exist .packages_installed (
     echo Required packages are already installed.
@@ -23,6 +26,10 @@ if exist .packages_installed (
     :: Create a flag file to indicate that packages have been installed
     echo Packages installed > .packages_installed
 )
+
+echo Checking Gemini API key validity...
+:: Run the Python script to check the API key
+python check_api_key.py
 
 echo Starting application...
 start "" python gradio_ui.py
