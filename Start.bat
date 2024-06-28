@@ -1,15 +1,28 @@
 @echo off
-cd /d d:\chatbot
+:: Change to the directory of the batch script
+cd /d %~dp0
 
-echo Creating virtual environment...
-call python -m venv venv
+:: Check if the venv folder exists
+if exist venv (
+    echo Virtual environment already exists.
+) else (
+    echo Creating virtual environment...
+    python -m venv venv
+)
 
 echo Activating virtual environment...
 call venv\Scripts\activate
 
-echo Installing required packages...
-:: Start a new command shell that will run pip install and keep track of its progress
-start "" /wait cmd /c "pip install -r requirements.txt"
+:: Check if the packages have already been installed
+if exist .packages_installed (
+    echo Required packages are already installed.
+) else (
+    echo Installing required packages...
+    :: Start a new command shell that will run pip install and keep track of its progress
+    start /wait cmd /c "pip install -r requirements.txt"
+    :: Create a flag file to indicate that packages have been installed
+    echo Packages installed > .packages_installed
+)
 
 echo Starting application...
 start "" python gradio_ui.py
@@ -22,7 +35,7 @@ set /a counter=0
 set /a counter+=1
 if %counter% leq 30 (
     set /p dummy=.
-    ping -n 2 localhost >nul
+    timeout /t 1 >nul
     goto loading
 )
 
