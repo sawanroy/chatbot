@@ -25,6 +25,8 @@ Demo: Demonstration of the chatbot interface in action, showcasing the functiona
 Technical Steps
 Environment Setup:
 
+Create .env file and paste it GEMINI_API_KEY=yourgeminikey
+
 python -m venv venv
 
 source venv/bin/activate # On Windows: venv\Scripts\activate
