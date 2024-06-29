@@ -1,5 +1,6 @@
 import gradio as gr
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from gemini_client import get_gemini_response
 
 def handle_user_query(chat_history, user_message):
@@ -30,6 +31,11 @@ def create_app():
         clear.click(lambda: [], None, chatbot)
 
     app = FastAPI()
+
+    @app.get("/")
+    def read_root():
+        return RedirectResponse(url="/gradio")
+
     app = gr.mount_gradio_app(app, demo, path="/gradio")
     return app
 
