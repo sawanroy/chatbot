@@ -25,8 +25,9 @@ def main():
             get_gemini_response, chatbot, chatbot
         )
         clear.click(lambda: [], None, chatbot)
-
-    demo.queue().launch()
+    app = FastAPI()
     app = gr.mount_gradio_app(app, demo, path="/gradio")
+    demo.queue().launch()
+
 if __name__ == "__main__":
     main()
