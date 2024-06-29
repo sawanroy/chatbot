@@ -27,6 +27,6 @@ def main():
         clear.click(lambda: [], None, chatbot)
 
     demo.queue().launch()
-
+    app = gr.mount_gradio_app(app, demo, path="/gradio")
 if __name__ == "__main__":
     main()
